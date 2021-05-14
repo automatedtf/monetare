@@ -1,0 +1,24 @@
+{
+  "name": "@automatedtf/monetare",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/automatedtf/monetare.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/automatedtf/monetare/issues"
+  },
+  "homepage": "https://github.com/automatedtf/monetare#readme",
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.6",
+    "typescript": "^4.2.4"
+  }
+}
