@@ -1,0 +1,7 @@
+{
+    "env": {
+      "test": {
+        "plugins": ["@babel/plugin-transform-typescript", "@babel/plugin-transform-modules-commonjs", "@babel/plugin-syntax-dynamic-import", "@babel/plugin-syntax-flow"]
+      }
+    }
+  }
