@@ -1,4 +1,4 @@
-import { Currency } from './Currency';
+import { Currency, Zero } from './Currency';
 import KeyPeggedCurrency from './KeyPeggedCurrency';
 export default class MetalPeggedCurrency implements Currency {
     _scraps: number;
@@ -50,23 +50,48 @@ export default class MetalPeggedCurrency implements Currency {
     }
 
     add(otherCurrency: Currency): Currency {
-        let metalPeggedCurrency = new MetalPeggedCurrency();
-        metalPeggedCurrency._scraps = this._scraps + otherCurrency._metalHash();
-        metalPeggedCurrency.withKeyPrice(this._keyPrice);
-        return metalPeggedCurrency;
+        
+        let resultantCurrency: Currency;
+        if (otherCurrency.isMetalPegged()) {
+            // if also metal, add currencies
+            let resultantMetalPeggedCurrency = new MetalPeggedCurrency();
+            resultantMetalPeggedCurrency._scraps = (otherCurrency as MetalPeggedCurrency)._scraps + this._scraps;
+            resultantCurrency = resultantMetalPeggedCurrency.withKeyPrice(this._keyPrice);
+        } else {
+            // other currency is keypegged
+            let resultantKeyPeggedCurrency = new KeyPeggedCurrency();
+            resultantKeyPeggedCurrency._keys = (otherCurrency as KeyPeggedCurrency)._keys;
+            resultantKeyPeggedCurrency._scraps = (otherCurrency as KeyPeggedCurrency)._scraps + this._scraps;
+            resultantCurrency = resultantKeyPeggedCurrency.withKeyPrice(this._keyPrice);
+        }
+
+        return resultantCurrency;
     }
 
     minus(otherCurrency: Currency): Currency {
-        let negativeOtherCurrency = new MetalPeggedCurrency();
-        negativeOtherCurrency._scraps = - otherCurrency._metalHash();
-        return this.add(negativeOtherCurrency);
+        // invert otherCurrency then add
+        let invertedCurrency: Currency;
+
+        if (otherCurrency.isMetalPegged()) {
+            let invertedMetalPeggedCurrency = new MetalPeggedCurrency();
+            invertedMetalPeggedCurrency._scraps = -(otherCurrency as MetalPeggedCurrency)._scraps;
+            invertedCurrency = invertedMetalPeggedCurrency.withKeyPrice(this._keyPrice);
+        } else {
+            let invertedKeyPeggedCurrency = new KeyPeggedCurrency();
+            invertedKeyPeggedCurrency._keys = -(otherCurrency as KeyPeggedCurrency)._keys;
+            invertedKeyPeggedCurrency._scraps = -(otherCurrency as KeyPeggedCurrency)._scraps;
+            invertedCurrency = invertedKeyPeggedCurrency.withKeyPrice(this._keyPrice);
+        }
+
+        return this.add(invertedCurrency);
     }
 
     multiply(times: number): Currency {
-        let metalPeggedCurrency = new MetalPeggedCurrency();
-        metalPeggedCurrency._scraps = this._scraps * times;
-        metalPeggedCurrency.withKeyPrice(this._keyPrice);
-        return metalPeggedCurrency;
+        let runningTotal: Currency = (times == 0) ? Zero() : this;
+        for (let i = 1; i < Math.abs(times); i++) {
+            runningTotal = (times >= 0) ? runningTotal.add(this) : runningTotal.minus(this);
+        }
+        return runningTotal;
     }
 
     isGreaterThan(otherCurrency: Currency): boolean {
