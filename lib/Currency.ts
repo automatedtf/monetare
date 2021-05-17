@@ -23,6 +23,8 @@ export interface Currency {
     minus(otherCurrency: Currency): Currency;
     multiply(times: number): Currency;
 
+    normalise(): Currency;
+
     isGreaterThan(otherCurrency: Currency): boolean;
     isGreaterThanOrEqualTo(otherCurrency: Currency): boolean;
     isEqualTo(otherCurrency: Currency): boolean;

@@ -45,7 +45,7 @@ export default class KeyPeggedCurrency implements Currency {
 
     toMetalPegged(): MetalPeggedCurrency {
         let metalPeggedCurrency = new MetalPeggedCurrency();
-        if(this._keyPrice == null) throw "Please set key price first";
+        if (this._keyPrice == null) throw "Please set key price first";
         metalPeggedCurrency.withKeyPrice(this._keyPrice);
         metalPeggedCurrency._scraps = this._metalHash();
         return metalPeggedCurrency;
@@ -99,6 +99,10 @@ export default class KeyPeggedCurrency implements Currency {
     }
     isLessThan(otherCurrency: Currency): boolean {
         return this._metalHash() < otherCurrency._metalHash();
+    }
+
+    normalise(): Currency {
+        return this.toMetalPegged().toKeyPegged();
     }
 
     _metalHash(): number {

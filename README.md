@@ -34,4 +34,6 @@ Currency
     isLessThanOrEqualTo: Currency -> boolean
     isEqualTo: Currency -> boolean
 
+    normalise(): Currency -> Currency
+
     _metalHash: () -> integer. Returns number of scraps. Makes it easy to add and convert things together
