@@ -1,11 +1,16 @@
-# Monetare 💸
+# Monetare 💱
 
 ### 📖 Table of Contents
 - [👋 Introduction](#-introduction)
 - [🔌 Getting Started](#-getting-started)
-    - [The Currencies within Team Fortress 2](#the-currencies-within-team-fortress-2)
+    - [Installation](#installation)
+    - [Currencies within Team Fortress 2](#the-currencies-within-team-fortress-2)
     - [Currency Naming Conventions and Jargon](#currency-naming-conventions-and-jargon)
     - [Currency Pegging](#currency-pegging)
+- [💴 Currency Methods](#-currency-methods)
+    - [Interface Implementations](#interface-implementations)
+        - [toString](#tostring)
+- [🧰 Utility Functions](#-utility-functions)
 - [📚 Helpful Resources](#-helpful-resources)
 
 ## 👋 Introduction
@@ -22,7 +27,7 @@ npm install @automatedtf/monetare
 ```
 This will add the library to your project's `package.json` file.
 
-##### The Currencies within Team Fortress 2
+##### Currencies within Team Fortress 2
 The Team Fortress 2 economy utilises two main currencies: the `Mann Co. Supply Crate Key` and metal.
 
 Metal is the base currency provided within the game, being generated from the crafting of items. 2 weapons can be crafted to create 1 `Scrap Metal`. 3 `Scrap Metal` can be used to craft 1 `Reclaimed Metal`. 3 ``Reclaimed Metal`` can be used to craft 1 `Refined Metal`.
@@ -59,40 +64,18 @@ For example, if an item is to represented using a key-pegged value such as `100;
 
 Generally, items worth more than `$2.50` use key-pegged values whilst items worth less than `$2.50` use metal-pegging to fix their values.
 
+## 💴 Currency Methods
 
+`🚧 TODO 🚧` Describe Currency Interface
 
-Global functions:
-    parseCurrencyString: string -> Currency
-    Zero
-    Refined Metal
-    Reclaimed Metal
-    Scrap Metal
-    Key
-        
-Currency
-    constructor: null -> Currency
+### Interface Implementations
+`🚧 TODO 🚧` Describe Currency Interface Method Implementations
 
-    toString - returns key, metal string
-    toPureMetalString - returns metal string
+##### toString
+`Currency.toString()` returns an internal representation of the currency.
 
-    keyPrice - returns key price
-    withKeyPrice - sets key price, returns new Currency
-
-    keyPegged - returns key pegged price 
-    metalPegged - returns metal pegged price
-
-    -- operations
-    add: Currency -> Currency
-    minus: Currency -> Currency
-    multiply: Currency -> Currency
-    isGreaterThan: Currency -> boolean
-    isGreaterThanOrEqualTo: Currency -> boolean
-    isLessThan: Currency -> boolean
-    isLessThanOrEqualTo: Currency -> boolean
-    isEqualTo: Currency -> boolean
-
-    normalise(): Currency -> Currency
-
-    _metalHash: () -> integer. Returns number of scraps. Makes it easy to add and convert things together
+## 🧰 Utility Functions
+`🚧 TODO 🚧`
 
 ## 📚 Helpful Resources
+`🚧 TODO 🚧`
