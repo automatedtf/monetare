@@ -11,10 +11,32 @@
     - [Approach to Using the Library](#approach-to-using-the-library)
     - [Example: Setting the price of an item](#example-setting-the-price-of-an-item)
     - [Example: Find the amount of change to provide](#example-find-the-amount-of-change-to-provide)
-- [💴 Currency Methods](#-currency-methods)
+- [🧰 Methods and Functions](#-methods-and-functions)
     - [Interface Implementations](#interface-implementations)
         - [toString](#tostring)
-- [🧰 Utility Functions](#-utility-functions)
+        - [toHumanReadeable](#tohumanreadable)
+        - [keyPrice](#keyprice)
+        - [withKeyPrice](#withkeyprice)
+        - [isKeyPegged](#iskeypegged)
+        - [isMetalPegged](#ismetalpegged)
+        - [toKeyPegged](#tokeypegged)
+        - [toMetalPegged](#tometalpegged)
+        - [add](#add)
+        - [minus](#minus)
+        - [multiply](#multiply)
+        - [isGreaterThan](#isgreaterthan)
+        - [isGreaterThanOrEqualTo](#isgreaterthanorequalto)
+        - [isEqualTo](#isequalto)
+        - [isLessThanOrEqualTo](#islessthanorequalto)
+        - [isLessThan](#islessthan)
+        - [normalise](#normalise)
+    - [Utility Functions](#-utility-functions)
+        - [parseCurrencyString](#parsecurrencystring)
+        - [Zero](#zero)
+        - [Key](#key)
+        - [Refined](#refined)
+        - [Reclaimed](#reclaimed)
+        - [Scrap](#scrap)
 - [📚 Helpful Resources](#-helpful-resources)
 
 ## 👋 Introduction
@@ -132,7 +154,7 @@ await saveUserToDatabase(user);
 return res.status(200).send("Success");
 ```
 
-## 💴 Currency Methods
+## 🧰  Methods and Functions
 
 The Currency interface forms the main base of the library. It provides a set of methods to help you work with either currency system (`Metal-pegged` or `Key-pegged`).
 
@@ -240,12 +262,14 @@ interface Currency {
 
 `🚧 TODO 🚧 - Expand on how normalise works`
 
-## 🧰 Utility Functions
+### Utility Functions
 ##### parseCurrencyString
 `parseCurrencyString(currencyString: string)` returns a new `Currency` object from the provided string.
 
 This should be a string of the form `<Scrap To Key Rate>;m<Scraps>` or `<Scrap To Keys Rate>;k<Keys>:<Scraps>` as given by the `toString` method.
 
+##### Zero
+`Zero` is a `Key-pegged` object representing zero value.
 ##### Key
 `Key` creates a new `Key-pegged` Currency object that represents 1 key.
 
