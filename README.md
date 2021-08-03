@@ -44,7 +44,7 @@ Monetare provides a standardisation to represent, operate and manage the currenc
 
 ## ℹ️ Prerequisite Knowledge
 
-This library provides a large number of functions to help you work with the currency system. It is recommended that you read through this document before using the library to ensure you understand how it works.
+This library provides a large number of functions to help you work with the currency system. It is recommended that you read through this section before using the library to ensure you understand how it works.
 
 ##### Currencies within Team Fortress 2
 The Team Fortress 2 economy utilises two main currencies: the `Mann Co. Supply Crate Key` and metal.
