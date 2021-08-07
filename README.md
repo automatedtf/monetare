@@ -244,12 +244,17 @@ interface Currency {
 ##### isGreaterThan
 `Currency.isGreaterThan(otherCurrency: Currency)` returns a boolean indicating whether the current object is greater than the other object.
 
+It will do this by first turning each currency into the equivalent number of `scraps` via `_metalHash()` and comparing both `scraps` values.
+
 ##### isGreaterThanOrEqualTo
 `Currency.isGreaterThanOrEqualTo(otherCurrency: Currency)` returns a boolean indicating whether the current object is greater than or equal to the other object.
 
+It will do this by first turning each currency into the equivalent number of `scraps` via `_metalHash()` and comparing both `scraps` values.
+
 ##### isEqualTo
 `Currency.isEqualTo(otherCurrency: Currency)` returns a boolean indicating whether the current object is equal to the other object.
-`🚧 TODO 🚧 - Expand on how isEqualTo is done`
+
+It will do this by first turning each currency into the equivalent number of `scraps` via `_metalHash()` and comparing both `scraps` values.
 
 ##### isLessThanOrEqualTo
 `Currency.isLessThanOrEqualTo(otherCurrency: Currency)` returns a boolean indicating whether the current object is less than or equal to the other object.
@@ -257,10 +262,15 @@ interface Currency {
 ##### isLessThan
 `Currency.isLessThan(otherCurrency: Currency)` returns a boolean indicating whether the current object is less than the other object.
 
+It will do this by first turning each currency into the equivalent number of `scraps` via `_metalHash()` and comparing both `scraps` values.
+
 ##### normalise
 `Currency.normalise()` returns a new `Currency` object with the values of the current object normalised.
 
-`🚧 TODO 🚧 - Expand on how normalise works`
+
+A normalisation on `KeyPeggedCurrency` requires the key price for a `Currency` object to be set. It will turn the accompanying object into `scraps` via `_metalHash()` and then convert the object back into the equivalent `Currency`:
+- `Metal-pegged` - Returns self
+- `Key-pegged` - Using the set key price, it will return a new `KeyPeggedCurrency` that gets the most amount of keys available out of the `scraps` and saves the rest as `scraps`.
 
 ### Utility Functions
 ##### parseCurrencyString
@@ -284,4 +294,4 @@ This should be a string of the form `<Scrap To Key Rate>;m<Scraps>` or `<Scrap T
 
 
 ## 📚 Helpful Resources
-`🚧 TODO 🚧`
+- [TheVirtualEconomist's Currency Guide](https://www.youtube.com/watch?v=_gN3DzUFQVU)

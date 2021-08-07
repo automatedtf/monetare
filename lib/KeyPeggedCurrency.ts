@@ -46,9 +46,10 @@ export default class KeyPeggedCurrency implements Currency {
     toMetalPegged(): MetalPeggedCurrency {
         let metalPeggedCurrency = new MetalPeggedCurrency();
         if (this._keyPrice == null) throw "Please set key price first";
-        metalPeggedCurrency.withKeyPrice(this._keyPrice);
-        metalPeggedCurrency._scraps = this._metalHash();
-        return metalPeggedCurrency;
+        return {
+            ...metalPeggedCurrency.withKeyPrice(this._keyPrice),
+            _scraps: this._metalHash()
+        };
     }
 
     add(otherCurrency: Currency): Currency {
