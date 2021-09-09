@@ -2,7 +2,8 @@
   "name": "@automatedtf/monetare",
   "version": "0.0.4",
   "description": "",
-  "main": "index.js",
+  "main": "out/index.js",
+  "types": "out/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "tsc && jest",
