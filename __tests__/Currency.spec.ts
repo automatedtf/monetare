@@ -1,40 +1,76 @@
 import { parseCurrencyString } from '../lib/Currency';
 
-test("Key price is correctly parsed", () => {
-    // 376;m000 - key price is 41.77, 0 currency
+describe("parseCurrencyString", () => {
+    it("MetalPeggedCurrency - General Case", () => {
 
-    let currency = parseCurrencyString("376;m000");
-    expect(currency.keyPrice()).toBe(376);
+        // 376;m000 - key price is 41.77, 0 currency
 
-    let currency2 = parseCurrencyString("1;m000");
-    expect(currency2.keyPrice()).toBe(1);
+        let currency = parseCurrencyString("376;m000");
+        expect(currency.keyPrice()).toBe(376);
+        expect(currency._metalHash()).toBe(0);
 
-    let currency3 = parseCurrencyString("9.0;m000");
-    expect(currency3.keyPrice()).toBe(9);
+        currency = currency.withKeyPrice(40);
+        expect(currency.keyPrice()).toBe(40);
+    });
 
-    let currency4 = parseCurrencyString(";m000");
-    expect(currency4.keyPrice()).toBe(null);
+    it("MetalPeggedCurrency - Float Key Price", () => {
+        let currency3 = parseCurrencyString("9.0;m6");
+        expect(currency3.keyPrice()).toBe(9);
+        expect(currency3._metalHash()).toBe(6);
+    });
 
-    let currency5 = parseCurrencyString("null;m000");
-    expect(currency5.keyPrice()).toBe(null);
-});
+    it("MetalPeggedCurrency - No Key Price", () => { 
 
-test("withKeyPrice", () => {
-    // 376;m000 - key price is 41.77, 0 currency
+        let currency = parseCurrencyString(";m000");
+        expect(currency.keyPrice()).toBe(null);
+        expect(currency._metalHash()).toBe(0);
 
-    let currency = parseCurrencyString("376;m000");
-    currency = currency.withKeyPrice(40);
-    expect(currency.keyPrice()).toBe(40);
+        let currency2 = parseCurrencyString(";m003");
+        expect(currency2.keyPrice()).toBe(null);
+        expect(currency2._metalHash()).toBe(3);
+    });
 
-    let currency2 = parseCurrencyString("1;m000");
-    currency2 = currency2.withKeyPrice(1);
-    expect(currency2.keyPrice()).toBe(1);
+    it("MetalPeggedCurrency - Null Key Price", () => {
+        let currency5 = parseCurrencyString("null;m000");
+        expect(currency5.keyPrice()).toBe(null);
+    });
 
-    let currency3 = parseCurrencyString("9.0;m000");
-    currency3 = currency3.withKeyPrice(0);
-    expect(currency3.keyPrice()).toBe(0);
+    it("KeyPeggedCurrency - General Case", () => {
+        let currency = parseCurrencyString("376;k0:3");
+        expect(currency.keyPrice()).toBe(376);
+        expect(currency._metalHash()).toBe(3);
 
-    let currency4 = parseCurrencyString(";m000");
-    currency4 = currency4.withKeyPrice(1.0);
-    expect(currency4.keyPrice()).toBe(1);
+        currency = currency.withKeyPrice(40);
+        expect(currency.keyPrice()).toBe(40);
+    });
+
+    it("KeyPeggedCurrency - Float Key Price", () => {
+        let currency = parseCurrencyString("9.0;k1:3");
+        expect(currency.keyPrice()).toBe(9);
+        expect(currency._metalHash()).toBe(12);
+
+        currency = currency.withKeyPrice(40);
+        expect(currency.keyPrice()).toBe(40);
+        expect(currency._metalHash()).toBe(43);
+    });
+
+    it("KeyPeggedCurrency - No Key Price", () => {
+        let currency = parseCurrencyString(";k0:0");
+        expect(currency.keyPrice()).toBe(null);
+        expect(currency._metalHash()).toBe(0);
+
+        let currency2 = parseCurrencyString(";k0:003");
+        expect(currency2.keyPrice()).toBe(null);
+        expect(currency2._metalHash()).toBe(3);
+
+        let currency3 = parseCurrencyString(";k0");
+        expect(currency3.keyPrice()).toBe(null);
+        expect(currency3._metalHash()).toBe(0);
+    });
+
+    it("KeyPeggedCurrency - Null Key Price", () => {
+        let currency5 = parseCurrencyString("null;m000");
+        expect(currency5.keyPrice()).toBe(null);
+        expect(currency5._metalHash()).toBe(0);
+    });
 });

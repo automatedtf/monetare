@@ -276,7 +276,12 @@ A normalisation on `KeyPeggedCurrency` requires the key price for a `Currency` o
 ##### parseCurrencyString
 `parseCurrencyString(currencyString: string)` returns a new `Currency` object from the provided string.
 
-This should be a string of the form `<Scrap To Key Rate>;m<Scraps>` or `<Scrap To Keys Rate>;k<Keys>:<Scraps>` as given by the `toString` method.
+For metal-pegged currencies, the string should be in the format `<Scrap To Key Rate>;m<Scraps>` e.g `376;m000`
+For key-pegged currencies, the string should be in either of these formats:
+- `<Scrap To Keys Rate>;k<Keys>:<Scraps>` e.g `376;k2:001` - 2 keys, 1 scrap
+- `<Scrap To Keys Rate>;k<Keys>` e.g `376;k2` - 2 keys simply
+
+More often or not, you can obtain this necessary string as given by the `toString` method.
 
 ##### Zero
 `Zero` is a `Key-pegged` object representing zero value.

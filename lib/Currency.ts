@@ -42,9 +42,9 @@ export function parseCurrencyString(currencyString: string):  Currency {
     let keys = 0;
     let scraps = 0;
 
-    if (currencyAmountString[0] == "k") { 
-        keys = parseInt(currencyAmountString);
-        currencyAmountString = `m${currencyAmountString.split(":")[1]}`;
+    if (currencyAmountString[0] == "k") {
+        keys = parseInt(currencyAmountString.substring(1));
+        currencyAmountString = `m${currencyAmountString.split(":")[1] || 0}`;
     }
 
     if (currencyAmountString[0] == "m") scraps = parseInt(currencyAmountString.substring(1));
