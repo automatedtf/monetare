@@ -42,18 +42,24 @@ export function parseCurrencyString(currencyString: string):  Currency {
     let keys = 0;
     let scraps = 0;
 
-    if (currencyAmountString[0] == "k") {
+    const isKeyPegged = currencyAmountString[0] == "k";
+    if (isKeyPegged) {
         keys = parseInt(currencyAmountString.substring(1));
         currencyAmountString = `m${currencyAmountString.split(":")[1] || 0}`;
     }
 
-    if (currencyAmountString[0] == "m") scraps = parseInt(currencyAmountString.substring(1));
+    const isMetalPegged = currencyAmountString[0] == "m";
+    if (isMetalPegged) scraps = parseInt(currencyAmountString.substring(1));
 
     // Set up currency object
-    let keyPeggedCurrency = new KeyPeggedCurrency();
-    keyPeggedCurrency._keys = keys;
-    keyPeggedCurrency._scraps = scraps;
-    return keyPeggedCurrency.withKeyPrice(keyPrice);
+    if (isKeyPegged) {
+        let keyPeggedCurrency = new KeyPeggedCurrency();
+        keyPeggedCurrency._keys = keys;
+        keyPeggedCurrency._scraps = scraps;
+        return keyPeggedCurrency.withKeyPrice(keyPrice);
+    }
+
+    return Scrap(scraps).withKeyPrice(keyPrice);
 }
 
 export function Zero(): MetalPeggedCurrency {

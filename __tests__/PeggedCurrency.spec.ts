@@ -11,7 +11,18 @@ test("string outputting", () => {
     expect(key.toString()).toBe(";k1:0");
     
     let generalCase = parseCurrencyString("376;m000");
-    expect(generalCase.toString()).toBe("376;k0:0");
+    expect(generalCase.toString()).toBe("376;m0");
+});
+
+test("human-readable string outputting", () => {
+    let currency = parseCurrencyString("9;k1:3");
+    expect(currency.toHumanReadable()).toBe("1 key, 0.33 refined");
+
+    let currency2 = parseCurrencyString("9;m18");
+    expect(currency2.toHumanReadable()).toBe("2 refined");
+
+    let currency3 = parseCurrencyString("9;m12");
+    expect(currency3.toHumanReadable()).toBe("1.33 refined");
 });
 
 test("adding", () => {

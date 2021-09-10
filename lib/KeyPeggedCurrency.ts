@@ -1,5 +1,5 @@
 import MetalPeggedCurrency from './MetalPeggedCurrency';
-import { Currency, Zero } from './Currency';
+import { Currency, Zero, Scrap } from './Currency';
 
 export default class KeyPeggedCurrency implements Currency {
     _keys: number;
@@ -17,7 +17,10 @@ export default class KeyPeggedCurrency implements Currency {
     }
 
     toHumanReadable(): string {
-        return `${this._keys} key${this._keys == 1 ? "" : "s"}${this._scraps == 0 ? "" : `, ${Math.round(this._scraps * 0.11).toFixed(2)} refined`}`;
+        let metal = Scrap(this._scraps);
+        let metalString = metal.isGreaterThan(Zero()) ? `, ${metal.toHumanReadable()}` : "";
+        
+        return `${this._keys} key${this._keys == 1 ? "" : "s"}${metalString}`;
     }
 
     keyPrice(): number {
