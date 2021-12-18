@@ -1,4 +1,4 @@
-# Monetare 💱
+# Monetare 💱 • ![https://github.com/automatedtf/monetare/actions/workflows/main.yml/badge.svg](https://github.com/automatedtf/monetare/actions/workflows/main.yml/badge.svg)
 
 ### 📖 Table of Contents
 - [👋 Introduction](#-introduction)
