@@ -1,6 +1,6 @@
 {
   "name": "@automatedtf/monetare",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "💱 Library to represent, perform arithmetic, encode, and swap between the currency systems within TF2",
   "main": "out/index.js",
   "types": "out/index.d.ts",
