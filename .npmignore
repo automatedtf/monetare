@@ -1,3 +1,8 @@
-__tests__
 /lib
 /index.ts
+
+# CI/CD
+.github
+__tests__
+.dockerignore
+test.dockerfile
