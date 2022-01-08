@@ -283,6 +283,12 @@ For key-pegged currencies, the string should be in either of these formats:
 
 More often or not, you can obtain this necessary string as given by the `toString` method.
 
+##### parseMetalDecimal
+`parseMetalDecimal(metalDecimal: string)` returns a new `Currency` object from the provided decimal string that represents the metal.
+For example, the decimal string `0.11` would be converted to a `Currency` object of the same value as a `Scrap`.
+
+This is a helper function for applications which may take in decimal strings from user inputs.
+
 ##### Zero
 `Zero` is a `Key-pegged` object representing zero value.
 ##### Key

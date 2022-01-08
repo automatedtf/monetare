@@ -1,4 +1,4 @@
-import { parseCurrencyString } from '../lib/Currency';
+import { parseCurrencyString, parseMetalDecimal } from '../lib/Currency';
 
 describe("parseCurrencyString", () => {
     it("MetalPeggedCurrency - General Case", () => {
@@ -73,4 +73,36 @@ describe("parseCurrencyString", () => {
         expect(currency5.keyPrice()).toBe(null);
         expect(currency5._metalHash()).toBe(0);
     });
+});
+
+describe("parseMetalDecimal", () => {
+    it("1.11 - General Case", () => {
+        let currency = parseMetalDecimal("1.11");
+        expect(currency.keyPrice()).toBe(null);
+        expect(currency._metalHash()).toBe(10);
+    });
+
+    it("0.11 - Edge Case: no whole parts", () => {
+        let currency = parseMetalDecimal("0.11");
+        expect(currency.keyPrice()).toBe(null);
+        expect(currency._metalHash()).toBe(1);
+    })
+
+    it("1.00 - Edge Case: no remainder", () => {
+        let currency = parseMetalDecimal("1.00");
+        expect(currency.keyPrice()).toBe(null);
+        expect(currency._metalHash()).toBe(9);
+    })
+
+    it("-0.11 - Negative Case", () => {
+        let currency = parseMetalDecimal("-0.11");
+        expect(currency.keyPrice()).toBe(null);
+        expect(currency._metalHash()).toBe(-1);
+    })
+
+    it("0.002 - Case: only 2 d.p counts", () => {
+        let currency = parseMetalDecimal("0.002");
+        expect(currency.keyPrice()).toBe(null);
+        expect(currency._metalHash()).toBe(0);
+    })
 });
