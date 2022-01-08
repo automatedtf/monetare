@@ -32,6 +32,7 @@
         - [normalise](#normalise)
     - [Utility Functions](#-utility-functions)
         - [parseCurrencyString](#parsecurrencystring)
+        - [parseMetalDecimal](#parsemetaldecimal)
         - [Zero](#zero)
         - [Key](#key)
         - [Refined](#refined)
