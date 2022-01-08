@@ -1,5 +1,7 @@
 /lib
 /index.ts
+.babelrc
+tsconfig.json
 
 # CI/CD
 .github
