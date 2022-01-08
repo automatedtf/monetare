@@ -94,6 +94,13 @@ describe("parseMetalDecimal", () => {
         expect(currency._metalHash()).toBe(9);
     })
 
+    it("1 - Edge Case: no decimal", () => {
+        let currency = parseMetalDecimal("1");
+        expect(currency.keyPrice()).toBe(null);
+        expect(currency._metalHash()).toBe(9);
+    })
+
+
     it("-0.11 - Negative Case", () => {
         let currency = parseMetalDecimal("-0.11");
         expect(currency.keyPrice()).toBe(null);

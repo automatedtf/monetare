@@ -65,7 +65,7 @@ export function parseCurrencyString(currencyString: string):  Currency {
 export function parseMetalDecimal(metalDecimal: string): Currency {
     const [whole, fraction] = metalDecimal.split(".");
     const sign = whole[0] == "-" ? -1 : 1;
-    return Refined( sign * parseInt(whole)).add(Scrap(sign * parseInt(fraction.substring(0, 2)) / 11 ));
+    return Refined( sign * parseInt(whole)).add(Scrap(sign * parseInt(fraction?.substring(0, 2) || "0") / 11 ));
 }
 
 export function Zero(): MetalPeggedCurrency {
