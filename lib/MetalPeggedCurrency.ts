@@ -16,7 +16,7 @@ export default class MetalPeggedCurrency implements Currency {
     toHumanReadable(): string {
         let refs = Math.floor(this._scraps / 9);
         let refRemainder = (this._scraps % 9) * 0.11;
-        return this._scraps == 0 ? "" : `${refRemainder == 0 ? refs : (refRemainder + refs)} refined`;
+        return `${refRemainder == 0 ? refs : (refRemainder + refs)} refined`;
     }
 
     keyPrice(): number {

@@ -23,6 +23,12 @@ test("human-readable string outputting", () => {
 
     let currency3 = parseCurrencyString("9;m12");
     expect(currency3.toHumanReadable()).toBe("1.33 refined");
+
+    let currency4 = parseCurrencyString("9;m0");
+    expect(currency4.toHumanReadable()).toBe("0 refined");
+
+    let currency5 = parseCurrencyString("9;k0:0");
+    expect(currency5.toHumanReadable()).toBe("0 keys");
 });
 
 test("adding", () => {
