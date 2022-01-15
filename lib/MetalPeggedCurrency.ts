@@ -43,8 +43,7 @@ export default class MetalPeggedCurrency implements Currency {
         if (this._keyPrice == null) throw "Please set key price first";
         keyPeggedCurrency._keys = Math.floor(this._scraps / this._keyPrice);
         keyPeggedCurrency._scraps = this._scraps % this._keyPrice;
-        keyPeggedCurrency.withKeyPrice(this._keyPrice);
-        return keyPeggedCurrency;
+        return keyPeggedCurrency.withKeyPrice(this._keyPrice);
     }
 
     toMetalPegged(): MetalPeggedCurrency {
